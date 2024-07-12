@@ -3,6 +3,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { BlogModule } from './blog/blog.module';
+import { CommentModule } from './comment/comment.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { BlogModule } from './blog/blog.module';
       synchronize: true,
     }),
     BlogModule,
+    CommentModule,
   ],
   controllers: [AppController],
   providers: [AppService],

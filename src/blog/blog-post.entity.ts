@@ -1,4 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
+import { Comment } from '../comment/comment.entity';
 
 @Entity()
 export class BlogPost {
