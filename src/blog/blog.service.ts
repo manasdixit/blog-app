@@ -14,6 +14,22 @@ export class BlogService {
     return this.blogPostRepository.save(post);
   }
 
+  async findAllPaginated(page: number, limit: number, search: string) {
+    const query = this.blogPostRepository.createQueryBuilder('post');
+
+    if (search) {
+      query.where('post.title LIKE :search OR post.content LIKE :search', {
+        search: `%${search}%`,
+      });
+    }
+
+    query.skip((page - 1) * limit).take(limit);
+
+    const [posts, total] = await query.getManyAndCount();
+
+    return { posts, total };
+  }
+
   findAll() {
     return this.blogPostRepository.find();
   }

@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  Query,
 } from '@nestjs/common';
 import { BlogService } from './blog.service';
 import { BlogPost } from './blog-post.entity';
@@ -17,6 +18,15 @@ export class BlogController {
   @Post()
   create(@Body() createBlogDto: Partial<BlogPost>) {
     return this.blogService.create(createBlogDto);
+  }
+
+  @Get()
+  findAllPaginated(
+    @Query('page') page = 1,
+    @Query('limit') limit = 10,
+    @Query('search') search: string,
+  ) {
+    return this.blogService.findAllPaginated(+page, +limit, search);
   }
 
   @Get()
